@@ -1,3 +1,2 @@
-document.querySelector('#app').innerHTML = `
-  <h1>Редактирование профиля</h1>
-`
+import './profile.scss';
+export { default as ProfilePage } from './profile.hbs?raw';

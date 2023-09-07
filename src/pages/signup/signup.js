@@ -1,3 +1,2 @@
-document.querySelector('#app').innerHTML = `
-  <h1>Скоро здесь будет страница регистрации</h1>
-`
+import './signup.scss';
+export { default as SignupPage } from './signup.hbs?raw';
