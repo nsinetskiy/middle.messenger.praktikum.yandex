@@ -45,6 +45,5 @@ const prepareTemplate = () => {
 if (!checkPath() && actualPathName !== '') {
   window.location.replace('/error404');
 }
-
     
 document.addEventListener('DOMContentLoaded', () => prepareTemplate());

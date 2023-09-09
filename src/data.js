@@ -90,8 +90,24 @@ export const data = {
   },
   navlinks: [
     {
+      href: '/login',
+      text: 'Авторизация'
+    },
+    {
+      href: '/signup',
+      text: 'Регистрация'
+    },
+    {
       href: '/chats',
-      text: 'Чаты'
+      text: 'Список чатов и лента переписки'
+    },
+    {
+      href: '/profile',
+      text: 'Настройки пользователя'
+    },
+    {
+      href: '/change-password',
+      text: 'Смена пароля'
     },
     {
       href: '/error404',
@@ -100,22 +116,6 @@ export const data = {
     {
       href: '/error500',
       text: 'Ошибка 500'
-    },
-    {
-      href: '/login',
-      text: 'Вход'
-    },
-    {
-      href: '/profile',
-      text: 'Настройки профиля'
-    },
-    {
-      href: '/change-password',
-      text: 'Страница смены пароля'
-    },
-    {
-      href: '/signup',
-      text: 'Регистрация'
     },
   ]
 };
