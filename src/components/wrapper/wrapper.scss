@@ -1,0 +1,14 @@
+@import '../../assets/styles/variables.scss';
+
+.wrapper {
+  &_bordered {
+    border: 2px solid $form-border-color-light;
+    padding: 40px 30px 20px;
+  }
+
+  &_error {
+    width: 620px;
+    height: 380px;
+    position: relative;
+  }
+}

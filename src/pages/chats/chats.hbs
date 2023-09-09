@@ -1,3 +1,4 @@
-{{#with chats}}
-<h1>{{title}}</h1>
-{{/with}}
+{{#> Root mod='chats'}}
+  {{> ChatsFeed}}
+  {{> CurrentChat}}
+{{/Root}}

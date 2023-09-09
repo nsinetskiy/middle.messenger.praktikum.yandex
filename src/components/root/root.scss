@@ -1,0 +1,30 @@
+@import '../../assets/styles/variables.scss';
+
+.root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &_login,
+  &_signup {
+    background-color: #000000;;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: $base-color;
+  }
+
+  &_login {
+    background-image: url('../../assets/images/bg-login.jpg');
+  }
+
+  &_signup {
+    background-image: url('../../assets/images/bg-signup.jpg');
+  }
+
+  &_chats {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}

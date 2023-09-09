@@ -1,0 +1,43 @@
+@import '../../assets/styles/variables.scss';
+
+.button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  transition: $transition-time;
+  
+  &_signout {
+    color: $attention-color;
+    font-size: 20px;
+    font-weight: bold;
+
+    &:hover {
+      color: $attention-hover-color;
+    }
+  }
+
+  &_link-shaped {
+    color: $controls-color;
+    font-size: 20px;
+
+    &:hover {
+      color: $controls-hover-color;
+    }
+  }
+
+  &_remove {
+    width: 20px;
+    height: 20px;
+    background: url('../../assets/svg/remove.svg') no-repeat;
+  }
+
+  &_attach {
+    width: 40px;
+    height: 40px;
+    background: url('../../assets/svg/attach.svg') no-repeat;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+  }
+}

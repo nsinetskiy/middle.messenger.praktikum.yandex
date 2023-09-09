@@ -1,1 +1,9 @@
-<h1>Ошибка 500</h1>
+{{#> Root}}
+  {{#> Wrapper mod='error'}}
+    {{> PageTitle title='500' mod='error'}}
+    {{> ErrorText text='Что-то пошло не так.<br>Мы уже работаем над решением проблемы.'}}
+    <nav>
+      {{> Link href='/chats' text='Вернуться к чатам' mod='error-page'}}
+    </nav>
+  {{/Wrapper}}
+{{/Root}}

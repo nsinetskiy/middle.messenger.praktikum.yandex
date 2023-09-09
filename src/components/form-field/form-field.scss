@@ -1,0 +1,113 @@
+@import '../../assets/styles/variables.scss';
+
+$block: '.form-field';
+
+#{$block} {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  position: relative;
+  width: 438px;
+
+  &_light {
+    #{$block} {
+      &__input {
+        border-color: $form-border-color-light;
+
+        &[type=text],
+        &[type=password],
+        &[type=email],
+        &[type=tel] {
+          color: $base-color;
+        }
+
+        &[type=submit] {
+          background-color: #ffffff;
+          color: $base-text-color;
+          margin-top: 10px;
+
+          &:hover {
+            background-color: $form-border-color-light;
+          }
+        }
+      }
+    }
+  }
+
+  &_narrow {
+    flex-direction: column;
+    align-items: normal;
+    margin-bottom: 20px;
+    width: 280px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    #{$block} {
+      &__label {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  &__label {
+    font-size: 14px;
+  }
+
+  &__input {
+    width: 280px;
+    height: 40px;
+    border-color: $form-border-color-dark;
+
+    &[type=text],
+    &[type=password],
+    &[type=email],
+    &[type=tel] {
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 0;
+      background-color: transparent;
+      padding-left: 20px;
+      color: $base-text-color;
+    }
+
+    &[type=submit] {
+      border: none;
+      font-size: 20px;
+      background-color: $controls-color;
+      color: $base-color;
+      cursor: pointer;
+      transition: $transition-time;
+      margin: 30px auto 0;
+
+      &:hover {
+        background-color: $controls-hover-color;
+      }
+    }
+
+    &[type=file] {
+      display: none;
+    }
+
+    &[type=search] {
+      border: 1px solid $message-typing-color;
+      padding: 11px 20px 12px 40px;
+      background: url('../../assets/svg/search.svg') no-repeat;
+      background-position: 20px center;
+      color: $message-typing-color;
+
+      &::placeholder {
+        color: $message-typing-color;
+      }
+    }
+  }
+
+  &__error {
+    position: absolute;
+    top: -15px;
+    font-size: 10px;
+    color: $attention-color;
+  }
+}

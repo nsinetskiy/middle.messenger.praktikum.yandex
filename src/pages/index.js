@@ -5,3 +5,4 @@ export { Error500Page } from './error500/error500.js';
 export { LoginPage } from './login/login.js';
 export { ProfilePage } from './profile/profile.js';
 export { SignupPage } from './signup/signup.js';
+export { ChangePasswordPage } from './change-password/change-password.js';

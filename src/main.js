@@ -1,6 +1,11 @@
 import Handlebars from 'handlebars';
 import { data } from './data.js';
-import '../global.scss';
+import * as Components from './components';
+import './assets/styles/global.scss';
+
+Object.entries(Components).forEach(([ name, component ]) => {
+  Handlebars.registerPartial(name, component);
+});
 
 // Для удобства реализуем роутинг
 // Импортируем модули всех страниц
@@ -25,8 +30,15 @@ const actualPathName = window.location.pathname.substring(1);
 // Проверяем существует ли страница с введённым pathname
 const checkPath = () => {
   return Object.keys(setPageComponents()).includes(actualPathName);
-}
+};
   
+const prepareTemplate = () => {
+  const rootContainer = document.querySelector('#app');
+  let context = data;
+     
+  rootContainer.innerHTML = !actualPathName ? Handlebars.compile(setPageComponents()['index'])(context) : Handlebars.compile(setPageComponents()[actualPathName])(context);
+};
+
 // Если pathname невалидный, перекидываем на страницу ошбки 404.
 // Пустой pathname проверем отдельно, так как он валидный,
 // по нему отдаём временную страницу с навигацией
@@ -34,11 +46,5 @@ if (!checkPath() && actualPathName !== '') {
   window.location.replace('/error404');
 }
 
-const prepareTemplate = () => {
-  const rootContainer = document.querySelector('#app');
-  let context = data;
-     
-  rootContainer.innerHTML = !actualPathName ? Handlebars.compile(setPageComponents()['index'])(context) : Handlebars.compile(setPageComponents()[actualPathName])(context);
-};
     
 document.addEventListener('DOMContentLoaded', () => prepareTemplate());

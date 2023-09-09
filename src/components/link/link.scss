@@ -1,0 +1,30 @@
+@import '../../assets/styles/variables.scss';
+
+.link {
+  color: $controls-color;
+  text-decoration: none;
+  display: block;
+  transition: $transition-time;
+
+  &:hover {
+    color: $controls-hover-color;
+  }
+
+  &_profile {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  &_error-page {
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+  }
+
+  &_feed {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+}

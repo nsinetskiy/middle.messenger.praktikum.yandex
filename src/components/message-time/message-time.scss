@@ -1,0 +1,11 @@
+@import '../../assets/styles/variables.scss';
+
+.message-time {
+  color: $message-color;
+  font-size: 8px;
+
+  &_current-chat {
+    font-size: 10px;
+    margin-bottom: -5px;
+  }
+}
