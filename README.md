@@ -4,7 +4,7 @@
 
 ## Ссылка на макеты
 
-[Figma]https://www.figma.com/file/Z693HhFeVQUN9lh6XXZaEQ/Messenger?type=design&node-id=0-1&mode=design
+[Figma](https://www.figma.com/file/Z693HhFeVQUN9lh6XXZaEQ/Messenger?type=design&node-id=0-1&mode=design)
 
 ## Ссылки на Netlify
 
