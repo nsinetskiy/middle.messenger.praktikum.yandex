@@ -1,0 +1,13 @@
+@import '../../assets/styles/variables.scss';
+
+.form {
+  &_profile {
+    margin-bottom: 40px;
+  }
+
+  &_chat-message {
+    border-top: 2px solid $controls-hover-color;
+    padding: 10px 20px;
+    position: relative;
+  }
+}

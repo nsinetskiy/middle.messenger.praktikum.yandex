@@ -1,0 +1,17 @@
+<label class="form-field{{#if light}} form-field_light{{/if}}{{#if narrow}} form-field_narrow{{/if}}">
+  {{#if label}}
+  <div class="form-field__label">{{label}}</div>
+  {{/if}}
+  <input
+    class="form-field__input"
+    {{#if type}} type="{{type}}"{{/if}}
+    {{#if name}} name="{{name}}"{{/if}}
+    {{#if placeholder}} placeholder="{{placeholder}}"{{/if}}
+    {{#if value}} value="{{value}}"{{/if}}
+    {{#if autocomplete}} autocomplete="{{autocomplete}}"{{/if}}
+    {{#if accept}} accept="{{accept}}{{/if}}"
+  >
+  {{#if errorText}}
+  <div class="form-field__error">{{errorText}}</div>
+  {{/if}}
+</label>

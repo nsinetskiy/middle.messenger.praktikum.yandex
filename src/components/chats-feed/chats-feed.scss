@@ -1,0 +1,81 @@
+@import '../../assets/styles/variables.scss';
+
+.chats-feed {
+  width: 310px;
+  height: 100vh;
+  overflow-y: hidden;
+  background: $feed-background-color;
+  overflow-x: hidden;
+
+  &__header {
+    padding: 15px 15px 10px;
+  }
+
+  &__list {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    height: calc(100% - 120px);
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__list-item {
+    padding: 0 15px;
+    cursor: pointer;
+
+    &_active {
+      background: $active-chat-color;
+    }
+  }
+  
+  &__list-item-content {
+    border-top: 1px solid $default-background-color;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__list-item-message-section {
+    width: 220px;
+    position: relative;
+  }
+
+  &__list-item-message-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  &__list-item-message {
+    font-size: 12px;
+    color: $message-color;
+    width: 185px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  &__list-item-message-marker {
+    font-weight: bold;
+    color: $base-text-color;
+  }
+
+  &__list-item-unread {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+    background: $controls-color;
+    border-radius: 50%;
+    color: $base-color;
+    font-size: 10px;
+    text-align: center;
+    line-height: 20px;
+  }
+}

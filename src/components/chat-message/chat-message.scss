@@ -1,0 +1,32 @@
+@import '../../assets/styles/variables.scss';
+
+.chat-message {
+  width: auto;
+  max-width: 310px;
+  margin-bottom: 5px;
+  padding: 10px 5px;
+  align-self: flex-start;
+  display: flex;
+  align-items: flex-end;
+
+  &_received {
+    background: $feed-background-color;
+    border-radius: 0 5px 5px 5px;
+
+    &:nth-child(2) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &_sent {
+    background: $active-chat-color;
+    border-radius: 5px 5px 0 5px;
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  &__text {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+}

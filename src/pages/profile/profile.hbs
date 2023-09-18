@@ -1,0 +1,22 @@
+{{#> Root}}
+  {{#> Wrapper}}
+    {{> PageTitle title='Настройки профиля'}}
+    {{#> Form mod='profile'}}
+      {{> AvatarEditor}}
+      {{#with profile}}
+        {{> FormField label='Имя' type='text' name='first_name' value=firstName autocomplete='given-name'}}
+        {{> FormField label='Фамилия' type='text' name='second_name' value=lastName autocomplete='family-name'}}
+        {{> FormField label='Отображаемое имя' type='text' name='display_name' value=displayName}}
+        {{> FormField label='Логин' type='text' name='login' value=login}}
+        {{> FormField label='E-mail' type='email' name='email' value=email autocomplete='email'}}
+        {{> FormField label='Телефон' type='tel' name='phone' value=phone autocomplete='tel'}}
+      {{/with}}
+      {{> FormField type='submit' value='Сохранить'}}
+    {{/Form}}
+    <nav>
+      {{> Link href='/chats' text='Вернуться к чатам' mod='profile'}}
+      {{> Link href='/change-password' text='Сменить пароль' mod='profile'}}
+    </nav>
+    {{> Button text='Выйти' mod='signout'}}
+  {{/ Wrapper}}
+{{/Root}}
