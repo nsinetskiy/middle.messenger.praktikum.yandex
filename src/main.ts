@@ -1,7 +1,13 @@
 import Handlebars from 'handlebars';
-import { data } from './data.js';
+import { data } from './data.ts';
 import * as Components from './components';
 import './assets/styles/global.scss';
+
+type Pages = {
+  [key: string]: {
+    [key: string]: string
+  }
+}
 
 Object.entries(Components).forEach(([ name, component ]) => {
   Handlebars.registerPartial(name, component);
@@ -9,11 +15,11 @@ Object.entries(Components).forEach(([ name, component ]) => {
 
 // Для удобства реализуем роутинг
 // Импортируем модули всех страниц
-const pages = import.meta.glob('./pages/**/*.js', { eager: true });
+const pages: Pages = import.meta.glob('./pages/**/*.ts', { eager: true });
 
 // Устанавливаем соответствие между названием файла странички (он же путь) и шаблоном Handlebars
 const setPageComponents = () => {
-  const pageComponentsMap = {};
+  const pageComponentsMap: { [key: string]: string } = {};
 
   for (const item in pages) {
     let key = item.split('/').slice(2, 3).join('');
@@ -28,15 +34,17 @@ const setPageComponents = () => {
 const actualPathName = window.location.pathname.substring(1);
 
 // Проверяем существует ли страница с введённым pathname
-const checkPath = () => {
+const checkPath = (): boolean => {
   return Object.keys(setPageComponents()).includes(actualPathName);
 };
   
-const prepareTemplate = () => {
+const prepareTemplate = (): void => {
   const rootContainer = document.querySelector('#app');
   let context = data;
      
-  rootContainer.innerHTML = !actualPathName ? Handlebars.compile(setPageComponents()['index'])(context) : Handlebars.compile(setPageComponents()[actualPathName])(context);
+  if (rootContainer) {
+    rootContainer.innerHTML = !actualPathName ? Handlebars.compile(setPageComponents()['index'])(context) : Handlebars.compile(setPageComponents()[actualPathName])(context);
+  }
 };
 
 // Если pathname невалидный, перекидываем на страницу ошбки 404.
