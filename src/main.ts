@@ -22,7 +22,7 @@ const setPageComponents = () => {
   const pageComponentsMap: { [key: string]: string } = {};
 
   for (const item in pages) {
-    let key = item.split('/').slice(2, 3).join('');
+    const key = item.split('/').slice(2, 3).join('');
 
     pageComponentsMap[key] = Object.values(pages[item])[0];
   }
@@ -40,7 +40,7 @@ const checkPath = (): boolean => {
   
 const prepareTemplate = (): void => {
   const rootContainer = document.querySelector('#app');
-  let context = data;
+  const context = data;
      
   if (rootContainer) {
     rootContainer.innerHTML = !actualPathName ? Handlebars.compile(setPageComponents()['index-page'])(context) : Handlebars.compile(setPageComponents()[actualPathName])(context);

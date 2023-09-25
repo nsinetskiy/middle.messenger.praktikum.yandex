@@ -3,7 +3,7 @@ enum METHOD {
   POST = 'POST',
   PUT = 'PUT',
   DELETE = 'DELETE'
-};
+}
 
 type Data = Record<string, unknown>
 
@@ -26,7 +26,7 @@ const queryStringify = (data: Data): string => {
   }, '?');
 };
 
-class HTTPTransport {
+export class HTTPTransport {
   get(url: string, options: RequestOptions) {
     return this.request(url, { ...options, method: METHOD.GET }, options.timeout);
   }
