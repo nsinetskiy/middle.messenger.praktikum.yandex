@@ -1,4 +1,4 @@
-export { IndexPage } from './index/index.ts';
+export { IndexPage } from './index-page/index-page.ts';
 export { ChatsPage } from './chats/chats.ts';
 export { Error404Page } from './error404/error404.ts';
 export { Error500Page } from './error500/error500.ts';

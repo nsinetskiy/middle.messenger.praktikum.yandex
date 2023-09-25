@@ -43,7 +43,7 @@ const prepareTemplate = (): void => {
   let context = data;
      
   if (rootContainer) {
-    rootContainer.innerHTML = !actualPathName ? Handlebars.compile(setPageComponents()['index'])(context) : Handlebars.compile(setPageComponents()[actualPathName])(context);
+    rootContainer.innerHTML = !actualPathName ? Handlebars.compile(setPageComponents()['index-page'])(context) : Handlebars.compile(setPageComponents()[actualPathName])(context);
   }
 };
 
