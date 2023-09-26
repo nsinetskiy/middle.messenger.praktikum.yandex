@@ -1,4 +1,4 @@
-@import '../../assets/styles/variables.scss';
+@import '../../assets/styles/variables';
 
 $block: '.form-field';
 
@@ -15,14 +15,14 @@ $block: '.form-field';
       &__input {
         border-color: $form-border-color-light;
 
-        &[type=text],
-        &[type=password],
-        &[type=email],
-        &[type=tel] {
+        &[type='text'],
+        &[type='password'],
+        &[type='email'],
+        &[type='tel'] {
           color: $base-color;
         }
 
-        &[type=submit] {
+        &[type='submit'] {
           background-color: #ffffff;
           color: $base-text-color;
           margin-top: 10px;
@@ -61,10 +61,10 @@ $block: '.form-field';
     height: 40px;
     border-color: $form-border-color-dark;
 
-    &[type=text],
-    &[type=password],
-    &[type=email],
-    &[type=tel] {
+    &[type='text'],
+    &[type='password'],
+    &[type='email'],
+    &[type='tel'] {
       border-style: solid;
       border-width: 1px;
       border-radius: 0;
@@ -73,7 +73,7 @@ $block: '.form-field';
       color: $base-text-color;
     }
 
-    &[type=submit] {
+    &[type='submit'] {
       border: none;
       font-size: 20px;
       background-color: $controls-color;
@@ -87,11 +87,11 @@ $block: '.form-field';
       }
     }
 
-    &[type=file] {
+    &[type='file'] {
       display: none;
     }
 
-    &[type=search] {
+    &[type='search'] {
       border: 1px solid $message-typing-color;
       padding: 11px 20px 12px 40px;
       background: url('../../assets/svg/search.svg') no-repeat;

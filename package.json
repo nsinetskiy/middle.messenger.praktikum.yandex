@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "tsc --noEmit && npx eslint . --ext .ts",
+    "prebuild": "npx tsc --noEmit && npx eslint . --ext .ts && npx stylelint **/*.scss",
     "build": "npm run prebuild && vite build",
     "preview": "vite preview",
     "start": "vite build && node ./server.cjs"
@@ -18,6 +18,9 @@
     "express": "^4.18.2",
     "handlebars": "^4.7.8",
     "sass": "^1.66.1",
+    "stylelint": "^15.10.3",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-config-standard-scss": "^11.0.0",
     "typescript": "^5.2.2",
     "uuid": "^9.0.1",
     "vite": "^4.4.5"
