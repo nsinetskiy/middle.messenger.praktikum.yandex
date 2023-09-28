@@ -1,25 +1,19 @@
-import Handlebars from 'handlebars';
-import { data } from './data.ts';
 import * as Components from './components';
+import { registerComponent } from './core/registerComponent';
 import './assets/styles/global.scss';
-
-type Pages = {
-  [key: string]: {
-    [key: string]: string
-  }
-}
+import Block from './core/Block.ts'
 
 Object.entries(Components).forEach(([ name, component ]) => {
-  Handlebars.registerPartial(name, component);
+  registerComponent(name, component);
 });
 
 // Для удобства реализуем роутинг
 // Импортируем модули всех страниц
-const pages: Pages = import.meta.glob('./pages/**/*.ts', { eager: true });
+const pages: {[key: string]: typeof Block} = import.meta.glob('./pages/**/*.ts', { eager: true });
 
 // Устанавливаем соответствие между названием файла странички (он же путь) и шаблоном Handlebars
 const setPageComponents = () => {
-  const pageComponentsMap: { [key: string]: string } = {};
+  const pageComponentsMap: { [key: string]: typeof Block } = {};
 
   for (const item in pages) {
     const key = item.split('/').slice(2, 3).join('');
@@ -38,16 +32,15 @@ const checkPath = (): boolean => {
   return Object.keys(setPageComponents()).includes(actualPathName);
 };
   
-const prepareTemplate = (): void => {
+const prepareTemplate = () => {
   const rootContainer = document.querySelector('#app');
-  const context = data;
-     
-  if (rootContainer) {
-    rootContainer.innerHTML = !actualPathName ? Handlebars.compile(setPageComponents()['index-page'])(context) : Handlebars.compile(setPageComponents()[actualPathName])(context);
-  }
+  const Component = !actualPathName ? setPageComponents()['index-page'] : setPageComponents()[actualPathName] as typeof Block;
+  const component = new Component({});
+  const content = component.getContent();
+  rootContainer?.append(content!);
 };
 
-// Если pathname невалидный, перекидываем на страницу ошбки 404.
+// Если pathname невалидный, перекидываем на страницу ошибки 404.
 // Пустой pathname проверем отдельно, так как он валидный,
 // по нему отдаём временную страницу с навигацией
 if (!checkPath() && actualPathName !== '') {

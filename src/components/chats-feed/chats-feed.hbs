@@ -1,21 +1,21 @@
 <div class="chats-feed">
   <div class="chats-feed__header">
     <nav>
-      {{> Link href='/profile' text='Настройки профиля' mod='feed'}}
+      {{{ Link href='/profile' text='Настройки профиля' mod='feed'}}}
     </nav>
-    {{#> Form}}
-      {{> FormField type='search' placeholder='Найти'}}
+    {{#Form}}
+      {{{ FormField type='search' placeholder='Найти' name='search'}}}
     {{/Form}}
   </div>
   <ul class="chats-feed__list">
-    {{#each chats.feed}}
+    {{#each feed}}
     <li class="chats-feed__list-item{{#if isActive}} chats-feed__list-item_active{{/if}}">
       <div class="chats-feed__list-item-content">
-        {{> Avatar}}
+        {{{ Avatar}}}
         <div class="chats-feed__list-item-message-section">
           <div class="chats-feed__list-item-message-info">
-            {{> ChatName}}
-            {{> MessageTime}}
+            {{{ ChatName name=name}}}
+            {{{ MessageTime time=time}}}
           </div>
           <div class="chats-feed__list-item-message">{{#if fromMe}}<span class="chats-feed__list-item-message-marker">Вы: </span>{{/if}}{{text}}</div>
           {{#if unread}}

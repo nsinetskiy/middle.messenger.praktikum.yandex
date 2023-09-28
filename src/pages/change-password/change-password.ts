@@ -1,2 +1,12 @@
-// import './change-password.scss';
-export { default as ChangePasswordPage } from './change-password.hbs?raw';
+import Block from '../../core/Block';
+import template from './change-password.hbs?raw';
+
+export class ChangePassword extends Block {
+  constructor() {
+    super({})
+  }
+
+  protected render(): string {
+    return template;
+  }
+}

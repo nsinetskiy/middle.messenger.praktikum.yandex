@@ -10,7 +10,7 @@ type Embeddable = {
   embed: (fragment: DocumentFragment) => void
 }
 
-class Block {
+export class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_RENDER: 'flow:render',

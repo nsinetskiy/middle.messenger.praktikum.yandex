@@ -1,21 +1,21 @@
-{{#with chats.currentChat}}
+{{#with currentChat}}
 <div class="current-chat">
   <div class="current-chat__header">
     <div class="current-chat__info">
-      {{> Avatar mod='current-chat'}}
-      {{> ChatName mod='current-chat'}}
+      {{{ Avatar mod='current-chat'}}}
+      {{{ ChatName mod='current-chat' name=name}}}
     </div>
-    {{> Button mod='remove'}}
+    {{{ Button mod='remove'}}}
   </div>
   <div class="current-chat__body">
     {{#each messages}}
-      {{> ChatMessage mod=type}}
+      {{{ ChatMessage mod=type text=text time=time}}}
     {{/each}}
   </div>
-  {{#> Form mod='chat-message'}}
-    {{> Button mod='attach'}}
-    {{> Textarea name='message' placeholder='Введите сообщение'}}
-    {{> SendMessage}}
+  {{#Form mod='chat-message'}}
+    {{{ Button mod='attach'}}}
+    {{{ Textarea name='message' placeholder='Введите сообщение'}}}
+    {{{ SendMessage}}}
   {{/Form}}
 </div>
 {{/with}}

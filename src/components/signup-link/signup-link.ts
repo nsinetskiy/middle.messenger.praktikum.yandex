@@ -1,2 +1,13 @@
+import Block from '../../core/Block';
+import template from './signup-link.hbs?raw';
 import './signup-link.scss';
-export { default as SignupLink } from './signup-link.hbs?raw';
+
+export class SignupLink extends Block {
+  constructor() {
+    super({})
+  }
+
+  protected render(): string {
+    return (template);
+  }
+}

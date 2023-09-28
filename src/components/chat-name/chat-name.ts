@@ -1,2 +1,15 @@
+import Block from '../../core/Block';
+import template from './chat-name.hbs?raw';
 import './chat-name.scss';
-export { default as ChatName } from './chat-name.hbs?raw';
+
+export class ChatName extends Block {
+  constructor(props: Record<string, string>) {
+    super({
+      ...props
+    });
+  }
+
+  protected render(): string {
+    return (template);
+  }
+}

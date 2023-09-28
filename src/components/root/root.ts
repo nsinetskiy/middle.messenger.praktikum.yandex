@@ -1,2 +1,15 @@
+import Block from '../../core/Block';
+import template from './root.hbs?raw';
 import './root.scss';
-export { default as Root } from './root.hbs?raw';
+
+export class Root extends Block {
+  constructor(props: Record<string, string>) {
+    super({
+      ...props
+    });
+  }
+
+  protected render(): string {
+    return (template);
+  }
+}

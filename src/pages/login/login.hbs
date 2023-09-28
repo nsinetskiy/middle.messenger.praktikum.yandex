@@ -1,13 +1,13 @@
-{{#> Root mod='login'}}
-  {{#> Wrapper mod='bordered'}}
-    {{> PageTitle title='Вход' mod='login'}}
-    {{#> Form}}
-      {{> FormField light=true narrow=true label='Логин' type='text' name='login'}}
-      {{> FormField light=true narrow=true label='Пароль' type='password' name='password'}}
-      {{> FormField light=true narrow=true type='submit' value='Войти' errorText='Неверный логин или пароль'}}
+{{#Root mod='login'}}
+  {{#Wrapper mod='bordered'}}
+    {{{ PageTitle title='Вход' mod='login'}}}
+    {{#Form}}
+      {{{ FormField light=true narrow=true label='Логин' type='text' name='login'}}}
+      {{{ FormField light=true narrow=true label='Пароль' type='password' name='password'}}}
+      {{{ FormField light=true narrow=true type='submit' value='Войти' errorText='Неверный логин или пароль'}}}
     {{/Form}}
     <nav>
-      {{> SignupLink}}
+      {{{ SignupLink}}}
     </nav>
-  {{/ Wrapper}}
+  {{/Wrapper}}
 {{/Root}}
