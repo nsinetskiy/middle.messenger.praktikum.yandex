@@ -3,8 +3,8 @@
     <nav>
       {{{ Link href='/profile' text='Настройки профиля' mod='feed'}}}
     </nav>
-    {{#Form}}
-      {{{ FormField type='search' placeholder='Найти' name='search'}}}
+    {{#Form onsubmit=onsubmit}}
+      {{{ FormField type='search' placeholder='Найти' name='search' ref='search'}}}
     {{/Form}}
   </div>
   <ul class="chats-feed__list">

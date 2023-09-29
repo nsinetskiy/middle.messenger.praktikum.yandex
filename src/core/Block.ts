@@ -170,6 +170,8 @@ export class Block {
     });
   }
 
+  public value() {}
+
   _createDocumentElement(tagName: string) {
     return document.createElement(tagName);
   }

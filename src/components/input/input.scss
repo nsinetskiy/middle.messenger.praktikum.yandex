@@ -1,0 +1,77 @@
+@import '../../assets/styles/variables';
+
+$block: '.input';
+$form-field: '.form-field';
+
+#{$block} {
+  width: 280px;
+  height: 40px;
+  border-color: $form-border-color-dark;
+
+  &[type='text'],
+  &[type='password'],
+  &[type='email'],
+  &[type='tel'] {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0;
+    background-color: transparent;
+    padding-left: 20px;
+    color: $base-text-color;
+  }
+
+  &[type='submit'] {
+    border: none;
+    font-size: 20px;
+    background-color: $controls-color;
+    color: $base-color;
+    cursor: pointer;
+    transition: $transition-time;
+    margin: 30px auto 0;
+
+    &:hover {
+      background-color: $controls-hover-color;
+    }
+  }
+
+  &[type='file'] {
+    display: none;
+  }
+
+  &[type='search'] {
+    border: 1px solid $message-typing-color;
+    padding: 11px 20px 12px 40px;
+    background: url('../../assets/svg/search.svg') no-repeat;
+    background-position: 20px center;
+    color: $message-typing-color;
+
+    &::placeholder {
+      color: $message-typing-color;
+    }
+  }
+}
+
+#{$form-field} {
+  &_light {
+    #{$block} {
+      border-color: $form-border-color-light;
+
+      &[type='text'],
+      &[type='password'],
+      &[type='email'],
+      &[type='tel'] {
+        color: $base-color;
+      }
+
+      &[type='submit'] {
+        background-color: #ffffff;
+        color: $base-text-color;
+        margin-top: 10px;
+
+        &:hover {
+          background-color: $form-border-color-light;
+        }
+      }
+    }
+  }
+}

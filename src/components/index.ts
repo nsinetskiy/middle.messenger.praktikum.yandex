@@ -3,6 +3,7 @@ export { Wrapper } from './wrapper/wrapper.ts';
 export { PageTitle } from './page-title/page-title.ts';
 export { Form } from './form/form.ts';
 export { FormField } from './form-field/form-field.ts';
+export { Input } from './input/input.ts';
 export { Textarea } from './textarea/textarea.ts';
 export { SendMessage } from './send-message/send-message.ts';
 export { SignupLink } from './signup-link/signup-link.ts';

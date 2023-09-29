@@ -2,15 +2,7 @@
   {{#if label}}
   <div class="form-field__label">{{label}}</div>
   {{/if}}
-  <input
-    class="form-field__input"
-    {{#if type}} type="{{type}}"{{/if}}
-    {{#if name}} name="{{name}}"{{/if}}
-    {{#if placeholder}} placeholder="{{placeholder}}"{{/if}}
-    {{#if value}} value="{{value}}"{{/if}}
-    {{#if autocomplete}} autocomplete="{{autocomplete}}"{{/if}}
-    {{#if accept}} accept="{{accept}}{{/if}}"
-  >
+  {{{ Input ref='input' type=type name=name placeholder=placeholder value=value autocomplete=autocomplete accept=accept}}}
   {{#if errorText}}
   <div class="form-field__error">{{errorText}}</div>
   {{/if}}

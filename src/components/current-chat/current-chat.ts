@@ -5,7 +5,15 @@ import './current-chat.scss';
 export class CurrentChat extends Block {
   constructor(props: Record<string, string>) {
     super({
-      ...props
+      ...props,
+      onsubmit: (event: Event) => {
+        const sentData = {
+          'message': this.refs.message.value()
+        };
+        
+        event.preventDefault();
+        console.log(sentData);
+      }
     });
   }
 

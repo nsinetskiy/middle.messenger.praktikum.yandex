@@ -1,13 +1,13 @@
 {{#Root mod='signup'}}
   {{#Wrapper mod='bordered'}}
     {{{ PageTitle title='Регистрация'}}}
-    {{#> Form}}
-      {{{ FormField light=true narrow=true label='Имя' type='text' name='first_name' autocomplete='given-name'}}}
-      {{{ FormField light=true narrow=true label='Фамилия' type='text' name='second_name' autocomplete='family-name'}}}
-      {{{ FormField light=true narrow=true label='Логин' type='text' name='login'}}}
-      {{{ FormField light=true narrow=true label='E-mail' type='email' name='email' autocomplete='email'}}}
-      {{{ FormField light=true narrow=true label='Пароль' type='password' name='password'}}}
-      {{{ FormField light=true narrow=true label='Телефон' type='tel' name='phone' autocomplete='tel'}}}
+    {{#Form onsubmit=onsubmit}}
+      {{{ FormField light=true narrow=true label='Имя' type='text' name='first_name' autocomplete='given-name' ref='first_name'}}}
+      {{{ FormField light=true narrow=true label='Фамилия' type='text' name='second_name' autocomplete='family-name' ref='second_name'}}}
+      {{{ FormField light=true narrow=true label='Логин' type='text' name='login' ref='login'}}}
+      {{{ FormField light=true narrow=true label='E-mail' type='email' name='email' autocomplete='email' ref='email'}}}
+      {{{ FormField light=true narrow=true label='Пароль' type='password' name='password' ref='password'}}}
+      {{{ FormField light=true narrow=true label='Телефон' type='tel' name='phone' autocomplete='tel' ref='phone'}}}
       {{{ FormField light=true narrow=true type='submit' value='Зарегистрироваться'}}}
     {{/Form}}
   {{/Wrapper}}

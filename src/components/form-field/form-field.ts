@@ -9,6 +9,10 @@ export class FormField extends Block {
     });
   }
 
+  public value() {
+    return (this.refs.input.element as HTMLInputElement)?.value || '';
+  }
+
   protected render(): string {
     return (template);
   }

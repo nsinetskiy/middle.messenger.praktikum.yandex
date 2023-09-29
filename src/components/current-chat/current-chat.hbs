@@ -1,5 +1,5 @@
-{{#with currentChat}}
 <div class="current-chat">
+{{#with currentChat}}
   <div class="current-chat__header">
     <div class="current-chat__info">
       {{{ Avatar mod='current-chat'}}}
@@ -12,10 +12,10 @@
       {{{ ChatMessage mod=type text=text time=time}}}
     {{/each}}
   </div>
-  {{#Form mod='chat-message'}}
+{{/with}}
+  {{#Form mod='chat-message' onsubmit=onsubmit}}
     {{{ Button mod='attach'}}}
-    {{{ Textarea name='message' placeholder='Введите сообщение'}}}
+    {{{ Textarea name='message' placeholder='Введите сообщение' ref='message'}}}
     {{{ SendMessage}}}
   {{/Form}}
 </div>
-{{/with}}

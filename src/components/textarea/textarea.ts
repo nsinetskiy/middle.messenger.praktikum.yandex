@@ -9,6 +9,10 @@ export class Textarea extends Block {
     });
   }
 
+  public value() {
+    return (this.element as HTMLInputElement)?.value || '';
+  }
+
   protected render(): string {
     return (template);
   }

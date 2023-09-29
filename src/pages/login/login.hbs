@@ -1,9 +1,9 @@
 {{#Root mod='login'}}
   {{#Wrapper mod='bordered'}}
     {{{ PageTitle title='Вход' mod='login'}}}
-    {{#Form}}
-      {{{ FormField light=true narrow=true label='Логин' type='text' name='login'}}}
-      {{{ FormField light=true narrow=true label='Пароль' type='password' name='password'}}}
+    {{#Form onsubmit=onsubmit}}
+      {{{ FormField light=true narrow=true label='Логин' type='text' name='login' ref='login'}}}
+      {{{ FormField light=true narrow=true label='Пароль' type='password' name='password' ref='password'}}}
       {{{ FormField light=true narrow=true type='submit' value='Войти' errorText='Неверный логин или пароль'}}}
     {{/Form}}
     <nav>
