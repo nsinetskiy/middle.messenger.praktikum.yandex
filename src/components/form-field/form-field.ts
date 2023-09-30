@@ -16,7 +16,7 @@ export class FormField extends Block {
 
   private validate() {
     const value = (this.refs.input.element as HTMLInputElement).value;
-    const errorText = value && (this.props.validate as (arg: string) => string)(value);
+    const errorText = (this.props.validate as (arg: string) => string)(value);
 
     if (errorText) {
       this.setProps({ errorText });
