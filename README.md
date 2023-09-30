@@ -23,6 +23,7 @@
 
 - `npm install` — установка зависимостей,
 - `npm run dev` — запуск в режиме разработки (localhost:5173),
+- `npm run prebuild` — проверка типизации и стиия кода,
 - `npm run build` — сборка продакшн-версии проекта,
 - `npm run preview` — предпросмотр продакшн-версии проекта (localhost:4173),
 - `npm run start` — сборка и запуск проекта (localhost:3000).
