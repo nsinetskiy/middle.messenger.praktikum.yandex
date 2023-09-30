@@ -59,11 +59,3 @@ export const phone = (value: string) => {
   
   return null;
 }
-
-export const message = (value: string) => {
-  if (value.length < 1) {
-    return 'Сообщение не должно быть пустым';
-  }
-
-  return null;
-}
