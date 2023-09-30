@@ -3,14 +3,14 @@
     {{{ PageTitle title='Настройки профиля'}}}
     {{#Form mod='profile' onsubmit=onsubmit}}
       {{{ AvatarEditor}}}
-      {{#with profile}}
-        {{{ FormField label='Имя' type='text' name='first_name' value=firstName autocomplete='given-name' ref='first_name'}}}
-        {{{ FormField label='Фамилия' type='text' name='second_name' value=lastName autocomplete='family-name' ref='second_name'}}}
-        {{{ FormField label='Отображаемое имя' type='text' name='display_name' value=displayName ref='display_name'}}}
-        {{{ FormField label='Логин' type='text' name='login' value=login ref='login'}}}
-        {{{ FormField label='E-mail' type='email' name='email' value=email autocomplete='email' ref='email'}}}
-        {{{ FormField label='Телефон' type='tel' name='phone' value=phone autocomplete='tel' ref='phone'}}}
-      {{/with}}
+      {{!-- {{#with profile}} --}}
+        {{{ FormField label='Имя' type='text' name='first_name' value=profile.firstName autocomplete='given-name' ref='first_name' required='true' validate=validate.name}}}
+        {{{ FormField label='Фамилия' type='text' name='second_name' value=profile.lastName autocomplete='family-name' ref='second_name' validate=validate.name}}}
+        {{{ FormField label='Отображаемое имя' type='text' name='display_name' value=profile.displayName ref='display_name' required='true' validate=validate.login}}}
+        {{{ FormField label='Логин' type='text' name='login' value=profile.login ref='login' required='true' validate=validate.login}}}
+        {{{ FormField label='E-mail' type='email' name='email' value=profile.email autocomplete='email' ref='email' validate=validate.email}}}
+        {{{ FormField label='Телефон' type='tel' name='phone' value=profile.phone autocomplete='tel' ref='phone' required='true' validate=validate.phone}}}
+      {{!-- {{/with}} --}}
       {{{ FormField type='submit' value='Сохранить'}}}
     {{/Form}}
     <nav>

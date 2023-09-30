@@ -1,11 +1,18 @@
 import Block from '../../core/Block';
 import template from './profile.hbs?raw';
 import { data } from '../../data';
+import * as validators from '../../utils/validators';
 
 export class Profile extends Block {
   constructor() {
     super({
       profile: data.profile,
+      validate: {
+        name: validators.name,
+        login: validators.login,
+        email: validators.email,
+        phone: validators.phone
+      },
       onsubmit: (event: Event) => {
         const sentData = {
           'first_name': this.refs.first_name.value(),

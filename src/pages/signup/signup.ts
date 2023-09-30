@@ -1,9 +1,17 @@
 import Block from '../../core/Block';
 import template from './signup.hbs?raw';
+import * as validators from '../../utils/validators';
 
 export class Signup extends Block {
   constructor() {
     super({
+      validate: {
+        name: validators.name,
+        login: validators.login,
+        email: validators.email,
+        password: validators.password,
+        phone: validators.phone
+      },
       onsubmit: (event: Event) => {
         const sentData = {
           'first_name': this.refs.first_name.value(),

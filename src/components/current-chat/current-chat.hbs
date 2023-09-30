@@ -13,9 +13,9 @@
     {{/each}}
   </div>
 {{/with}}
-  {{#Form mod='chat-message' onsubmit=onsubmit}}
+  {{#Form mod='chat-message' onsubmit=onsubmit validate=validate.login}}
     {{{ Button mod='attach'}}}
-    {{{ Textarea name='message' placeholder='Введите сообщение' ref='message'}}}
+    {{{ Textarea name='message' placeholder='Введите сообщение' ref='message' reuired='true'}}}
     {{{ SendMessage}}}
   {{/Form}}
 </div>

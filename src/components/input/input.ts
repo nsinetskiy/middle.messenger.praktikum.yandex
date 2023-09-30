@@ -7,6 +7,9 @@ export class Input extends Block {
     super({
       ...props
     });
+    this.props.events = {
+      blur: this.props.onblur
+    }
   }
 
   protected render(): string {
