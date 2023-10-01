@@ -9,10 +9,12 @@ type Data = Record<string, unknown>
 
 type RequestOptions = {
   headers?: Record<string, string>
-  method: METHOD
+  method?: METHOD
   data?: Data
   timeout?: number
 }
+
+type HTTPMethod = (url: string, options?: RequestOptions) => Promise<unknown>
 
 const queryStringify = (data: Data): string => {
   const keys = Object.keys(data);
@@ -27,23 +29,23 @@ const queryStringify = (data: Data): string => {
 };
 
 export class HTTPTransport {
-  get(url: string, options: RequestOptions) {
-    return this.request(url, { ...options, method: METHOD.GET }, options.timeout);
-  }
+  get: HTTPMethod = (url, options = {}) => (
+    this.request(url, { ...options, method: METHOD.GET }, options.timeout)
+  )
 
-  post(url: string, options: RequestOptions) {
-    return this.request(url, { ...options, method: METHOD.POST }, options.timeout);
-  }
+  post: HTTPMethod = (url, options = {}) => (
+    this.request(url, { ...options, method: METHOD.POST }, options.timeout)
+  )
 
-  put(url: string, options: RequestOptions) {
-    return this.request(url, { ...options, method: METHOD.PUT }, options.timeout);
-  }
+  put: HTTPMethod = (url, options = {}) => (
+    this.request(url, { ...options, method: METHOD.PUT }, options.timeout)
+  )
 
-  delete(url: string, options: RequestOptions) {
-    return this.request(url, { ...options, method: METHOD.DELETE }, options.timeout);
-  }
+  delete: HTTPMethod = (url, options = {}) => (
+    this.request(url, { ...options, method: METHOD.DELETE }, options.timeout)
+  )
 
-  request(url: string, options: RequestOptions = { method: METHOD.GET }, timeout = 5000) {
+  request = (url: string, options: RequestOptions = { method: METHOD.GET }, timeout = 5000) => {
     const {headers = {}, method, data} = options;
 
     return new Promise<XMLHttpRequest>((resolve, reject) => {
@@ -51,7 +53,7 @@ export class HTTPTransport {
       const isGet = method === METHOD.GET;
 
       xhr.open(
-        method,
+        method!,
         isGet && !!data
           ? `${url}${queryStringify(data)}`
           : url
