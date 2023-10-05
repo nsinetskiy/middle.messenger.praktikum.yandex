@@ -1,9 +1,9 @@
-{{#> Root}}
-  {{#> Wrapper mod='error'}}
-    {{> PageTitle title='404' mod='error'}}
-    {{> ErrorText text='Такой страницы нет.'}}
+{{#Root}}
+  {{#Wrapper mod='error'}}
+    {{{ PageTitle title='404' mod='error'}}}
+    {{{ ErrorText text='Такой страницы нет.'}}}
     <nav>
-      {{> Link href='/chats' text='Вернуться к чатам' mod='error-page'}}
+      {{{ Link href='/chats' text='Вернуться к чатам' mod='error-page'}}}
     </nav>
   {{/Wrapper}}
 {{/Root}}

@@ -1,4 +1,4 @@
-@import '../../assets/styles/variables.scss';
+@import '../../assets/styles/variables';
 
 .chat-message {
   width: auto;
@@ -11,7 +11,7 @@
 
   &_received {
     background: $feed-background-color;
-    border-radius: 0 5px 5px 5px;
+    border-radius: 0 5px 5px;
 
     &:nth-child(2) {
       margin-bottom: 10px;
@@ -20,7 +20,7 @@
 
   &_sent {
     background: $active-chat-color;
-    border-radius: 5px 5px 0 5px;
+    border-radius: 5px 5px 0;
     margin-right: 0;
     margin-left: auto;
   }
