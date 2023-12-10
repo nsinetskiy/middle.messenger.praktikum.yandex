@@ -10,6 +10,18 @@
     color: $controls-hover-color;
   }
 
+  &_signup {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: $base-color;
+    text-align: center;
+
+    &:hover {
+      color: $form-border-color-light;
+    }
+  }
+
   &_profile {
     font-size: 20px;
     margin-bottom: 15px;

@@ -1,12 +1,12 @@
 import Block from '../../core/Block';
-import template from './profile.hbs?raw';
+import template from './settings.hbs?raw';
 import { data } from '../../data';
 import * as validators from '../../utils/validators';
 
-export class Profile extends Block {
+export class Settings extends Block {
   constructor() {
     super({
-      profile: data.profile,
+      profile: data.settings,
       validate: {
         name: validators.name,
         login: validators.login,

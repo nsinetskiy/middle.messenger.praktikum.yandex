@@ -6,7 +6,6 @@ export { FormField } from './form-field/form-field.ts';
 export { Input } from './input/input.ts';
 export { Textarea } from './textarea/textarea.ts';
 export { SendMessage } from './send-message/send-message.ts';
-export { SignupLink } from './signup-link/signup-link.ts';
 export { ErrorText } from './error-text/error-text.ts';
 export { Link } from './link/link.ts';
 export { Button } from './button/button.ts';

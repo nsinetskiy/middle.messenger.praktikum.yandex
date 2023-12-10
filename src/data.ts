@@ -1,5 +1,5 @@
 export const data = {
-  profile: {
+  settings: {
     firstName: 'Никита',
     lastName: 'Синецкий',
     displayName: 'nsinetskiy',
@@ -7,7 +7,7 @@ export const data = {
     email: 'nsinetskiy@someemail.ru',
     phone: '+71234567890'
   },
-  chats: {
+  messenger: {
     feed: [
       {
         name: 'Вася',
@@ -87,35 +87,5 @@ export const data = {
         },
       ]
     }
-  },
-  navlinks: [
-    {
-      href: '/login',
-      text: 'Авторизация'
-    },
-    {
-      href: '/signup',
-      text: 'Регистрация'
-    },
-    {
-      href: '/chats',
-      text: 'Список чатов и лента переписки'
-    },
-    {
-      href: '/profile',
-      text: 'Настройки пользователя'
-    },
-    {
-      href: '/change-password',
-      text: 'Смена пароля'
-    },
-    {
-      href: '/error404',
-      text: 'Ошибка 404'
-    },
-    {
-      href: '/error500',
-      text: 'Ошибка 500'
-    },
-  ]
+  }
 };

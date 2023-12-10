@@ -15,7 +15,8 @@ export class Block {
     INIT: 'init',
     FLOW_RENDER: 'flow:render',
     FLOW_CDM: 'flow:component-did-mount',
-    FLOW_CDU: 'flow:component-did-update'
+    FLOW_CDU: 'flow:component-did-update',
+    FLOW_CWU: 'flow:component-will-unmount'
   };
 
   public id: string = makeUUID();
@@ -78,6 +79,7 @@ export class Block {
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
   }
 
   private _init() {
@@ -88,7 +90,7 @@ export class Block {
   protected init() {}
 
   _componentDidMount() {
-    this._componentDidMount();
+    this.componentDidMount();
   }
 
   componentDidMount() {}
@@ -98,6 +100,21 @@ export class Block {
     Object.values(this.children).forEach(child => {
       child.dispatchComponentDidMount();
     });
+  }
+
+  _componentWillUnmount() {
+    this.componentWillUnmount();
+    this._removeEvents();
+  }
+
+  componentWillUnmount() {}
+
+  public dispatchComponentWillUnmount() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CWU);
+    Object.values(this.children).forEach(child => {
+      child.dispatchComponentWillUnmount()
+    });
+    this._element?.remove();
   }
 
   private _componentDidUpdate() {
