@@ -1,13 +1,15 @@
 import Block from '../../core/Block';
+import { initMessenger } from '../../services/chats';
 import template from './messenger.hbs?raw';
-import { data } from '../../data';
 
 export class Messenger extends Block {
   constructor() {
     super({
-      feed: data.messenger.feed,
-      currentChat: data.messenger.currentChat
-    })
+      feed: window.store.getState().chats,
+      currentChat: window.store.getState().activeChat,
+      user: window.store.getState().user
+    });
+    initMessenger();
   }
 
   protected render(): string {

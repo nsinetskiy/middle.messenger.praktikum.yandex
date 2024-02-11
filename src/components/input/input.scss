@@ -37,18 +37,6 @@ $form-field: '.form-field';
   &[type='file'] {
     display: none;
   }
-
-  &[type='search'] {
-    border: 1px solid $message-typing-color;
-    padding: 11px 20px 12px 40px;
-    background: url('../../assets/svg/search.svg') no-repeat;
-    background-position: 20px center;
-    color: $message-typing-color;
-
-    &::placeholder {
-      color: $message-typing-color;
-    }
-  }
 }
 
 #{$form-field} {

@@ -1,6 +1,7 @@
 import Block from '../../core/Block';
 import template from './login.hbs?raw';
 import * as validators from '../../utils/validators';
+import { login } from '../../services/auth';
 
 export class Login extends Block {
   constructor() {
@@ -11,12 +12,12 @@ export class Login extends Block {
       },
       onsubmit: (event: Event) => {
         const sentData = {
-          'login': this.refs.login.value(),
-          'password': this.refs.password.value()
+          login: this.refs.login.value()!,
+          password: this.refs.password.value()!
         };
         
         event.preventDefault();
-        console.log(sentData);
+        login(sentData).catch(error => this.refs.alert.setProps({ text: error }));
       }
     })
   }

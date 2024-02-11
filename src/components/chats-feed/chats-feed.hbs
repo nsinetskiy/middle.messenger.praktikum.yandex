@@ -1,29 +1,22 @@
 <div class="chats-feed">
   <div class="chats-feed__header">
-    <nav>
-      {{{ Link href='/settings' text='Настройки профиля' class='link' mod='feed'}}}
-    </nav>
-    {{#Form onsubmit=onsubmit}}
-      {{{ FormField type='search' placeholder='Найти' name='search' ref='search'}}}
-    {{/Form}}
+    <div class="chats-feed__header-top">
+      {{{ Button mod='add' onClick=openCreateChatDialog}}}
+      <nav>
+        {{{ Link href='/settings' text='Настройки профиля' class='link' mod='feed'}}}
+      </nav>
+    </div>
   </div>
   <ul class="chats-feed__list">
     {{#each feed}}
-    <li class="chats-feed__list-item{{#if isActive}} chats-feed__list-item_active{{/if}}">
-      <div class="chats-feed__list-item-content">
-        {{{ Avatar}}}
-        <div class="chats-feed__list-item-message-section">
-          <div class="chats-feed__list-item-message-info">
-            {{{ ChatName name=name}}}
-            {{{ MessageTime time=time}}}
-          </div>
-          <div class="chats-feed__list-item-message">{{#if fromMe}}<span class="chats-feed__list-item-message-marker">Вы: </span>{{/if}}{{text}}</div>
-          {{#if unread}}
-          <div class="chats-feed__list-item-unread">{{unread}}</div>
-          {{/if}}
-        </div>
-      </div>
-    </li>
+      {{{ ChatsFeedListItem id=id avatar=avatar title=title time=time last_message=last_message}}}
     {{/each}}
   </ul>
+  {{#Dialog ref='createChatDialog'}}
+    {{#Form onsubmit=createChat}}
+      {{{ FormField narrow=true label='Название чата' type='text' name='title' required='true' ref='title' validate=validate.chatName}}}
+      {{{ ApiAlertLine ref='alert' text=text }}}
+      {{{ FormField type='submit' value='Создать чат'}}}
+    {{/Form}}
+  {{/Dialog}}
 </div>

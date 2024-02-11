@@ -1,4 +1,7 @@
 import Block from '../../core/Block';
+import * as validators from '../../utils/validators';
+import { addUsersToChat, deleteChat } from '../../services/chats';
+import { StoreEvents } from '../../core/Store';
 import template from './current-chat.hbs?raw';
 import './current-chat.scss';
 
@@ -6,6 +9,30 @@ export class CurrentChat extends Block {
   constructor(props: Record<string, string>) {
     super({
       ...props,
+      validate: {
+        chatUserId: validators.chatUserId
+      },
+      openAddUserDialog: () => {
+        const dialog = this.refs.addUserDialog.getContent() as HTMLDialogElement;
+
+        dialog.showModal();
+      },
+      addUser: (event: Event) => {
+        event.preventDefault();
+        const sentData = {
+          users: [Number(this.refs.userid.value())!],
+          chatId: window.store.getState().activeChat!.id
+        };
+
+        addUsersToChat(sentData).catch(error => alert(error));
+      },
+      deleteChat: () => {
+        const sentData = {
+          chatId: window.store.getState().activeChat!.id
+        };
+
+        deleteChat(sentData).catch(error => alert(error));
+      },
       onsubmit: (event: Event) => {
         const sentData = {
           'message': this.refs.message.value()
@@ -15,9 +42,17 @@ export class CurrentChat extends Block {
         console.log(sentData);
       }
     });
+    this.props.isAdmin = () => {
+      return window.store.getState().user?.id === window.store.getState().activeChat?.created_by;
+    }
+    window.store.on(StoreEvents.Updated, () => {
+      this.setProps({
+        currentChat: window.store.getState().activeChat
+      });
+    });
   }
 
   protected render(): string {
-    return (template);
+    return template;
   }
 }

@@ -1,21 +1,45 @@
 <div class="current-chat">
-{{#with currentChat}}
-  <div class="current-chat__header">
-    <div class="current-chat__info">
-      {{{ Avatar mod='current-chat'}}}
-      {{{ ChatName mod='current-chat' name=name}}}
+  {{#if currentChat}}
+    <div class="current-chat__main-section">
+      <div class="current-chat__header">
+        <div class="current-chat__info">
+          {{{ Avatar mod='current-chat' imageSrc=currentChat.avatar}}}
+          {{{ ChatName mod='current-chat' name=currentChat.title}}}
+        </div>
+        <div class="current-chat__header-buttons">
+          {{{ Button mod='add-user' onClick=openAddUserDialog}}}
+          {{#if isAdmin}}
+            {{{ Button mod='delete' onClick=deleteChat}}}
+          {{/if}}
+        </div>
+      </div>
+      <div class="current-chat__body">
+        {{#each messages}}
+          {{{ ChatMessage mod=type text=text time=time}}}
+        {{/each}}
+      </div>
+      {{#Form mod='chat-message' onsubmit=onsubmit}}
+        {{{ Button mod='attach'}}}
+        {{{ Textarea name='message' placeholder='Введите сообщение' ref='message' required='true'}}}
+        {{{ SendMessage}}}
+      {{/Form}}
+      {{#Dialog ref='addUserDialog'}}
+        {{#Form onsubmit=addUser}}
+          {{{ FormField narrow=true label='ID пользователя' type='text' name='userid' required='true' ref='userid' validate=validate.chatUserId}}}
+          {{{ ApiAlertLine ref='alert' text=text }}}
+          {{{ FormField type='submit' value='Добавить'}}}
+        {{/Form}}
+      {{/Dialog}}
     </div>
-    {{{ Button mod='remove'}}}
-  </div>
-  <div class="current-chat__body">
-    {{#each messages}}
-      {{{ ChatMessage mod=type text=text time=time}}}
-    {{/each}}
-  </div>
-{{/with}}
-  {{#Form mod='chat-message' onsubmit=onsubmit}}
-    {{{ Button mod='attach'}}}
-    {{{ Textarea name='message' placeholder='Введите сообщение' ref='message' required='true'}}}
-    {{{ SendMessage}}}
-  {{/Form}}
+    <div class="current-chat__users">
+      <div class="current-chat__users-title">Участники</div>
+      <ul class="current-chat__users-list">
+        {{#each currentChat.users}}
+          {{{ CurrentChatUsersListItem avatar=avatar first_name=first_name second_name=second_name id=id role=role }}}
+        {{/each}}
+      </ul>
+    </div>
+  {{else}}
+    <div class="current-chat_empty">Выберите чат</div>
+  {{/if}}
 </div>

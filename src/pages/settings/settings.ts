@@ -1,12 +1,14 @@
 import Block from '../../core/Block';
 import template from './settings.hbs?raw';
-import { data } from '../../data';
 import * as validators from '../../utils/validators';
+import { changeUserProfile } from '../../services/settings';
+import { logout } from '../../services/auth';
+import { StoreEvents } from '../../core/Store';
 
 export class Settings extends Block {
   constructor() {
     super({
-      profile: data.settings,
+      profile: window.store.getState().user,
       validate: {
         name: validators.name,
         login: validators.login,
@@ -15,18 +17,24 @@ export class Settings extends Block {
       },
       onsubmit: (event: Event) => {
         const sentData = {
-          'first_name': this.refs.first_name.value(),
-          'second_name': this.refs.second_name.value(),
-          'display_name': this.refs.display_name.value(),
-          'login': this.refs.login.value(),
-          'email': this.refs.email.value(),
-          'phone': this.refs.phone.value()
+          'first_name': this.refs.first_name.value()!,
+          'second_name': this.refs.second_name.value()!,
+          'display_name': this.refs.display_name.value()!,
+          'login': this.refs.login.value()!,
+          'email': this.refs.email.value()!,
+          'phone': this.refs.phone.value()!
         };
         
         event.preventDefault();
-        console.log(sentData);
-      }
+        changeUserProfile(sentData).catch(error => this.refs.alert.setProps({ text: error }));
+      },
+      logout: logout
     })
+    window.store.on(StoreEvents.Updated, () => {
+      this.setProps({
+        profile: window.store.getState().user
+      });
+    });
   }
 
   protected render(): string {

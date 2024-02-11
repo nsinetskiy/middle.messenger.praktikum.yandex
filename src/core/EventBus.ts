@@ -1,6 +1,6 @@
 type Callback = (...args: unknown[]) => void
 
-export class EventBus {
+class EventBus {
   private listeners: { [key: string]: Callback[] } = {};
 
   on(event: string, callback: Callback) {
@@ -23,7 +23,7 @@ export class EventBus {
 
   emit(event: string, ...args: unknown[]) {
     if (!this.listeners[event]) {
-      throw new Error(`Нет события ${event}`);
+      return;
     }
 
     this.listeners[event].forEach(listener => {
@@ -31,3 +31,5 @@ export class EventBus {
     });
   }
 }
+
+export default EventBus;

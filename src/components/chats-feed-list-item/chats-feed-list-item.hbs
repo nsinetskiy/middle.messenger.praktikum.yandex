@@ -1,0 +1,15 @@
+<li class="chats-feed-list-item{{#if isActive}} chats-feed-list-item_active{{/if}}">
+  <div class="chats-feed-list-item__content">
+    {{{ Avatar imageSrc=avatar}}}
+    <div class="chats-feed-list-item__message-section">
+      <div class="chats-feed-list-item__message-info">
+        {{{ ChatName name=title}}}
+        {{{ MessageTime time=time}}}
+      </div>
+      <div class="chats-feed-list-item__message">{{#if fromMe}}<span class="chats-feed-list-item__message-marker">Вы: </span>{{/if}}{{last_message}}</div>
+      {{#if unread}}
+        <div class="chats-feed-list-item__unread">{{unread_count}}</div>
+      {{/if}}
+    </div>
+  </div>
+</li>

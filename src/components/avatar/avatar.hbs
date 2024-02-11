@@ -1,1 +1,5 @@
-<div class="avatar{{#if mod}} avatar_{{mod}}{{/if}}"></div>
+<div class="avatar{{#if mod}} avatar_{{mod}}{{/if}}">
+  {{#if imageSrc}}
+    <img src="{{baseUrl}}/resources{{imageSrc}}" alt="Аватар" class="avatar__image">
+  {{/if}}
+</div>

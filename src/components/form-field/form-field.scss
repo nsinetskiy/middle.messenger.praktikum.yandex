@@ -27,6 +27,16 @@ $block: '.form-field';
     }
   }
 
+  &_file {
+
+    #{$block} {
+      &__label {
+        width: 100%;
+        cursor: pointer;
+      }
+    }
+  }
+
   &__label {
     font-size: 14px;
   }

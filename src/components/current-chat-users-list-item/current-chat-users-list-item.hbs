@@ -1,0 +1,9 @@
+<li class="current-chat-users-list-item">
+  {{{ Avatar imageSrc=avatar}}}
+  <div class="current-chat-users-list-item__title">{{first_name}} {{second_name}}</div>
+  {{#if isAdmin}}
+    <span class="current-chat-users-list-item__admin-label">Admin</span>
+  {{else}}
+    {{{ Button mod='delete-user' onClick=deleteUser}}}
+  {{/if}}
+</li>

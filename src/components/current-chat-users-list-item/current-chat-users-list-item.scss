@@ -1,0 +1,16 @@
+@import '../../assets/styles/variables';
+
+.current-chat-users-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+
+  &__title {
+    width: 150px;
+    font-weight: bold;
+  }
+
+  &__admin-label {
+    color: $controls-color;
+  }
+}
