@@ -1,6 +1,5 @@
 import Block from '../../core/Block';
 import { changeUserAvatar } from '../../services/settings';
-// import { BASE_URL } from '../../../constants';
 import template from './avatar-editor.hbs?raw';
 import './avatar-editor.scss';
 
