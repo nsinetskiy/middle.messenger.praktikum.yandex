@@ -2,6 +2,7 @@ import Block from '../../core/Block';
 import template from './settings.hbs?raw';
 import * as validators from '../../utils/validators';
 import { changeUserProfile } from '../../services/settings';
+import Router from '../../core/Router';
 import { logout } from '../../services/auth';
 import { StoreEvents } from '../../core/Store';
 
@@ -27,6 +28,11 @@ export class Settings extends Block {
         
         event.preventDefault();
         changeUserProfile(sentData).catch(error => this.refs.alert.setProps({ text: error }));
+      },
+      goBack: () => {
+        const router = new Router('#app');
+        
+        router.back();
       },
       logout: logout
     })

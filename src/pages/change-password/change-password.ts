@@ -1,5 +1,6 @@
 import Block from '../../core/Block';
 import { changeUserPassword } from '../../services/settings';
+import Router from '../../core/Router';
 import template from './change-password.hbs?raw';
 import * as validators from '../../utils/validators';
 
@@ -22,7 +23,12 @@ export class ChangePassword extends Block {
         } else {
           this.refs.alert.setProps({ text: 'Пароли не совпадают' });
         }
-      }
+      },
+      goBack: () => {
+        const router = new Router('#app');
+        
+        router.back();
+      },
     })
   }
 
