@@ -3,7 +3,7 @@
     <div class="current-chat__main-section">
       <div class="current-chat__header">
         <div class="current-chat__info">
-          {{{ Avatar mod='current-chat' imageSrc=currentChat.avatar}}}
+          {{!-- {{{ Avatar mod='current-chat' imageSrc=currentChat.avatar}}} --}}
           {{{ ChatName mod='current-chat' name=currentChat.title}}}
         </div>
         <div class="current-chat__header-buttons">
@@ -19,7 +19,7 @@
         {{/each}}
       </div>
       {{#Form mod='chat-message' onsubmit=onsubmit}}
-        {{{ Button mod='attach'}}}
+        {{!-- {{{ Button mod='attach'}}} --}}
         {{{ Textarea name='message' placeholder='Введите сообщение' ref='message' required='true'}}}
         {{{ SendMessage}}}
       {{/Form}}
