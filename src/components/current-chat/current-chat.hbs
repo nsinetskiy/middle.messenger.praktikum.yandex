@@ -14,8 +14,8 @@
         </div>
       </div>
       <div class="current-chat__body">
-        {{#each messages}}
-          {{{ ChatMessage mod=type text=text time=time}}}
+        {{#each currentChat.messages}}
+          {{{ ChatMessage mod=mod text=content time=time user_id=user_id}}}
         {{/each}}
       </div>
       {{#Form mod='chat-message' onsubmit=onsubmit}}

@@ -2,6 +2,7 @@ import Block from '../../core/Block';
 import * as validators from '../../utils/validators';
 import { addUsersToChat, deleteChat } from '../../services/chats';
 import { StoreEvents } from '../../core/Store';
+import { sendMessage } from '../../services/messages';
 import template from './current-chat.hbs?raw';
 import './current-chat.scss';
 
@@ -34,20 +35,26 @@ export class CurrentChat extends Block {
         deleteChat(sentData).catch(error => alert(error));
       },
       onsubmit: (event: Event) => {
+        const messageField = this.refs.message.getContent() as HTMLTextAreaElement;
         const sentData = {
-          'message': this.refs.message.value()
+          'message': messageField.value
         };
         
         event.preventDefault();
-        console.log(sentData);
+        sendMessage(sentData.message);
+        messageField!.value = '';
       }
     });
     this.props.isAdmin = () => {
       return window.store.getState().user?.id === window.store.getState().activeChat?.created_by;
     }
+    this.props.messages = () => {
+      window.store.getState().activeChat?.messages;
+    };
     window.store.on(StoreEvents.Updated, () => {
       this.setProps({
-        currentChat: window.store.getState().activeChat
+        currentChat: window.store.getState().activeChat,
+        messages: window.store.getState().activeChat?.messages
       });
     });
   }

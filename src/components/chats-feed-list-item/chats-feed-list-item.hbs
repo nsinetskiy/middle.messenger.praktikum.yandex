@@ -6,10 +6,10 @@
         {{{ ChatName name=title}}}
         {{{ MessageTime time=time}}}
       </div>
-      <div class="chats-feed-list-item__message">{{#if fromMe}}<span class="chats-feed-list-item__message-marker">Вы: </span>{{/if}}{{last_message}}</div>
-      {{#if unread}}
+      <div class="chats-feed-list-item__message">{{#if fromMe}}<span class="chats-feed-list-item__message-marker">Вы: </span>{{/if}}{{last_message.content}}</div>
+      {{!-- {{#if unread_count}}
         <div class="chats-feed-list-item__unread">{{unread_count}}</div>
-      {{/if}}
+      {{/if}} --}}
     </div>
   </div>
 </li>

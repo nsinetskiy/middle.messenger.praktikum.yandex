@@ -1,3 +1,5 @@
+import WSTransport from "./core/WSTransport";
+
 export type User = {
   id: number;
   first_name: string;
@@ -9,10 +11,23 @@ export type User = {
   email: string;
 };
 
-type LastMessage = {
-  user: User;
-  time: string;
+export type Message = {
+  reverse(): Message[] | undefined;
+  chat_id: number;
   content: string;
+  file?: string;
+  id: number;
+  is_read: boolean;
+  time: string;
+  type: string;
+  user_id: number;
+};
+
+export type LastMessage = {
+  content: string;
+  id: number;
+  time: string;
+  user: User;
 };
 
 export type Chat = {
@@ -22,13 +37,19 @@ export type Chat = {
   unreadCount: number;
   lastMessage: LastMessage | null;
   users?: ChatUser[];
+  token?: string;
+  messages?: Message[];
 };
 
 export type CurrentChat = {
   id: number;
   title: string;
   avatar: Nullable<string>;
-  created_by?: number
+  created_by?: number;
+  last_message?: LastMessage;
+  token?: string;
+  messages?: Message[];
+  webSocket?: WSTransport;
 };
 
 export type AppState = {

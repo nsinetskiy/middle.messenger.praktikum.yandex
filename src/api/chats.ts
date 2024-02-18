@@ -32,6 +32,10 @@ class ChatsAPI {
   async deleteChat(data: ChatDeleteRequest) {
     return this.httpTransport.delete(`${BASE_URL}/chats`, { data });
   }
+
+  async requestChatToken(id: number) {
+    return this.httpTransport.post(`${BASE_URL}/chats/token/${id}`);
+  }
 }
 
 export default ChatsAPI;

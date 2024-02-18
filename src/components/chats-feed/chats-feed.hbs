@@ -9,7 +9,7 @@
   </div>
   <ul class="chats-feed__list">
     {{#each feed}}
-      {{{ ChatsFeedListItem id=id avatar=avatar title=title time=time last_message=last_message}}}
+      {{{ ChatsFeedListItem id=id avatar=avatar title=title time=time last_message=last_message unread_count=unread_count}}}
     {{/each}}
   </ul>
   {{#Dialog ref='createChatDialog'}}

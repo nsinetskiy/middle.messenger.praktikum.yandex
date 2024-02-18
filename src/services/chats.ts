@@ -1,5 +1,6 @@
 import ChatsAPI from '../api/chats';
 import apiErrorHandler from '../utils/apiErrorHandler';
+import { connectWebSocket } from './messages.ts';
 
 import type { CreateChatRequest, UsersRequest, ChatDeleteRequest } from '../types';
 
@@ -29,14 +30,21 @@ const getActiveChat = async (selectedChatId: number) => {
   
   if (data) {
     const activeChatUsers = await getChatUsers(selectedChatId);
-
+    
     data.users = activeChatUsers;
+
+    if (data.users && data.users.length > 1) {
+      const token = await requestChatToken(selectedChatId);
+      data.token = token;
+      const userId = window.store.getState().user!.id;
+      connectWebSocket(userId, selectedChatId, token, data);
+    }
   }
 
   window.store.set({ activeChat: data });
-
+  
   return data;
-}
+};
 const createChat = async (data: CreateChatRequest) => {
   const res = await chatsApi.createChat(data) as Record<string, unknown>;
 
@@ -112,7 +120,19 @@ const deleteChat = async (data: ChatDeleteRequest) => {
   window.store.set({ chats: chats, activeChat: null });
 
   return;
-}
+};
+const requestChatToken = async (id: number) => {
+  const res = await chatsApi.requestChatToken(id) as Record<string, unknown>;
+  const data = JSON.parse(res.response as string);
+
+  if (res.status !== 200) {
+    apiErrorHandler(res);
+
+    return;
+  }
+
+  return data.token;
+};
 
 export {
   getChats,
@@ -122,5 +142,6 @@ export {
   getChatUsers,
   addUsersToChat,
   deleteUsersFromChat,
-  deleteChat
+  deleteChat,
+  requestChatToken
 };
