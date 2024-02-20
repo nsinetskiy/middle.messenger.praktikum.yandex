@@ -1,0 +1,10 @@
+@import '../../assets/styles/variables';
+
+.dialog {
+  position: relative;
+  border: none;
+
+  &::backdrop {
+    background: $overlay-background-color;
+  }
+}

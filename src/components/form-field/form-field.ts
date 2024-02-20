@@ -6,7 +6,7 @@ export class FormField extends Block {
   constructor(props: Record<string, string>) {
     super({
       ...props,
-      onblur: () => (this.props.type !== 'submit' && this.props.type !== 'search') && this.validate()
+      onblur: () => (this.props.type !== 'submit' && this.props.type !== 'file') && this.validate()
     });
   }
 

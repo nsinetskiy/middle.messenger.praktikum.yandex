@@ -6,20 +6,6 @@
   align-items: center;
   margin-bottom: 30px;
 
-  &__overlay {
-    display: none;
-
-    &_active {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: fixed;
-      inset: 0;
-      background-color: $overlay-background-color;
-      z-index: 8;
-    }
-  }
-
   &__input-container {
     width: 506px;
     height: 325px;

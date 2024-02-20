@@ -1,0 +1,8 @@
+@import '../../assets/styles/variables';
+
+$block: '.api-alert-line';
+
+#{$block} {
+  color: $attention-color;
+  min-height: 17px;
+}

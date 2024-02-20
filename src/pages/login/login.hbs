@@ -4,10 +4,11 @@
     {{#Form onsubmit=onsubmit}}
       {{{ FormField light=true narrow=true label='Логин' type='text' name='login' required='true' ref='login' validate=validate.login}}}
       {{{ FormField light=true narrow=true label='Пароль' type='password' name='password' required='true' ref='password' validate=validate.password}}}
+      {{{ ApiAlertLine ref='alert' text=text }}}
       {{{ FormField light=true narrow=true type='submit' value='Войти'}}}
     {{/Form}}
     <nav>
-      {{{ SignupLink}}}
+      {{{ Link href='/sign-up' text='Впервые?' class='link' mod='signup'}}}
     </nav>
   {{/Wrapper}}
 {{/Root}}

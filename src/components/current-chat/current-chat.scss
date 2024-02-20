@@ -4,6 +4,13 @@
   width: calc(100% - 310px);
   height: 100vh;
   overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  &__main-section {
+    display: grid;
+    grid-column: 1 / 5;
+  }
 
   &__header {
     height: 60px;
@@ -24,11 +31,37 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     padding: 20px;
 
     &::-webkit-scrollbar {
       display: none;
     }
+  }
+
+  &__users {
+    background: $feed-background-color;
+    padding: 30px;
+  }
+
+  &__users-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  &__users-list {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    height: calc(100% - 120px);
+    overflow-y: auto;
+  }
+
+  &_empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column-start: 3;
+    color: $message-typing-color;
   }
 }

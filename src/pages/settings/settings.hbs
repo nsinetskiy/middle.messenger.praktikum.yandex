@@ -1,0 +1,21 @@
+{{#Root}}
+  {{#Wrapper}}
+    {{{ PageTitle title='Настройки профиля'}}}
+    {{{ AvatarEditor}}}
+    {{#Form mod='profile' onsubmit=onsubmit}}
+      {{{ FormField label='Имя' type='text' name='first_name' value=profile.first_name autocomplete='given-name' ref='first_name' required='true' validate=validate.name}}}
+      {{{ FormField label='Фамилия' type='text' name='second_name' value=profile.second_name autocomplete='family-name' ref='second_name' validate=validate.name}}}
+      {{{ FormField label='Отображаемое имя' type='text' name='display_name' value=profile.display_name ref='display_name' validate=validate.login}}}
+      {{{ FormField label='Логин' type='text' name='login' value=profile.login ref='login' required='true' validate=validate.login}}}
+      {{{ FormField label='E-mail' type='email' name='email' value=profile.email autocomplete='email' ref='email' validate=validate.email}}}
+      {{{ FormField label='Телефон' type='tel' name='phone' value=profile.phone autocomplete='tel' ref='phone' required='true' validate=validate.phone}}}
+      {{{ ApiAlertLine ref='alert' text=text }}}
+      {{{ FormField type='submit' value='Сохранить'}}}
+    {{/Form}}
+    <nav>
+      {{{ Button text='Вернуться' mod='link-shaped' onClick=goBack}}}
+      {{{ Link href='/change-password' text='Сменить пароль' class='link' mod='profile'}}}
+    </nav>
+    {{{ Button text='Выйти' mod='signout' onClick=logout}}}
+  {{/Wrapper}}
+{{/Root}}

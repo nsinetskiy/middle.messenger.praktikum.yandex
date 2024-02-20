@@ -1,11 +1,14 @@
 <div class="avatar-editor">
-  {{{ Avatar mod='profile'}}}
-  {{{ Button text='Сменить аватар' mod='link-shaped'}}}
-  <div class="avatar-editor__overlay">
+  {{{ Avatar mod='profile' imageSrc=getAvatarSrc}}}
+  {{{ Button text='Сменить аватар' mod='link-shaped' onClick=openDialog}}}
+  {{#Dialog ref='dialog'}}
     <div class="avatar-editor__input-container">
       {{{ ModalTitle title='Сменить аватар'}}}
-      {{{ FormField narrow=true label='Выберите файл на компьютере' type='file' name='avatar' accept='.jpg'}}}
-      {{{ FormField type='submit' value='Загрузить'}}}
+      {{#Form onsubmit=onsubmit ref='form'}}
+        {{{ FormField file=true label='Выберите файл на компьютере' type='file' name='avatar' accept='.jpeg,.jpg,.png,.gif,.webp'}}}
+        {{{ ApiAlertLine ref='alert' text=text }}}
+        {{{ FormField type='submit' value='Загрузить'}}}
+      {{/Form}}
     </div>
-  </div>
+  {{/Dialog}}
 </div>

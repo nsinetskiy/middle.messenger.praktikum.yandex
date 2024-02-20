@@ -5,7 +5,7 @@ enum METHOD {
   DELETE = 'DELETE'
 }
 
-type Data = Record<string, unknown>
+type Data = Record<string, unknown> | FormData
 
 type RequestOptions = {
   headers?: Record<string, string>
@@ -16,7 +16,7 @@ type RequestOptions = {
 
 type HTTPMethod = (url: string, options?: RequestOptions) => Promise<unknown>
 
-const queryStringify = (data: Data): string => {
+const queryStringify = (data: Record<string, unknown>): string => {
   const keys = Object.keys(data);
 
   if (typeof data !== 'object') {
@@ -28,7 +28,7 @@ const queryStringify = (data: Data): string => {
   }, '?');
 };
 
-export class HTTPTransport {
+class HTTPTransport {
   get: HTTPMethod = (url, options = {}) => (
     this.request(url, { ...options, method: METHOD.GET }, options.timeout)
   )
@@ -55,7 +55,7 @@ export class HTTPTransport {
       xhr.open(
         method!,
         isGet && !!data
-          ? `${url}${queryStringify(data)}`
+          ? `${url}${queryStringify(data as Record<string, unknown>)}`
           : url
       );
       Object.keys(headers).forEach(key => {
@@ -68,12 +68,18 @@ export class HTTPTransport {
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
+      xhr.withCredentials = true;
 
       if (isGet || !data) {
         xhr.send();
+      } else if (data instanceof FormData) {
+        xhr.send(data);
       } else {
+        xhr.setRequestHeader('Content-Type','application/json');
         xhr.send(JSON.stringify(data));
       }
     });
   }
 }
+
+export default HTTPTransport;

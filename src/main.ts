@@ -1,50 +1,46 @@
 import * as Components from './components';
+import * as Pages from './pages';
 import { registerComponent } from './core/registerComponent';
 import './assets/styles/global.scss';
-import Block from './core/Block.ts'
+import Store from './core/Store';
+import Router from './core/Router';
+import { initApp } from './services/init';
+
+import type { AppState } from './types';
+
+declare global {
+  interface Window {
+    store: Store<AppState>;
+  }
+
+  type Nullable<T> = T | null;
+}
+
+const initState: AppState = {
+  error: null,
+  user: null,
+  activeChat: null,
+  chats: []
+};  
+const prepareTemplate = () => {
+  const router = new Router('#app');
+  
+  router
+    .use('/', Pages.Login)
+    .use('/sign-up', Pages.Signup)
+    .use('/messenger', Pages.Messenger)
+    .use('/settings', Pages.Settings)
+    .use('/change-password', Pages.ChangePassword)
+    .use('/error404', Pages.Error404)
+    .use('/error500', Pages.Error500)
+    .start();
+};
 
 Object.entries(Components).forEach(([ name, component ]) => {
   registerComponent(name, component);
 });
-
-// Для удобства реализуем роутинг
-// Импортируем модули всех страниц
-const pages: {[key: string]: typeof Block} = import.meta.glob('./pages/**/*.ts', { eager: true });
-
-// Устанавливаем соответствие между названием файла странички (он же путь) и шаблоном Handlebars
-const setPageComponents = () => {
-  const pageComponentsMap: { [key: string]: typeof Block } = {};
-
-  for (const item in pages) {
-    const key = item.split('/').slice(2, 3).join('');
-
-    pageComponentsMap[key] = Object.values(pages[item])[0];
-  }
-
-  return pageComponentsMap;
-};
-// То, что фактически в адресной строке
-// Избавляемся от слеша в начале, чтобы совпадало с ключами pageComponentsMap
-const actualPathName = window.location.pathname.substring(1);
-
-// Проверяем существует ли страница с введённым pathname
-const checkPath = (): boolean => {
-  return Object.keys(setPageComponents()).includes(actualPathName);
-};
-  
-const prepareTemplate = () => {
-  const rootContainer = document.querySelector('#app');
-  const Component = !actualPathName ? setPageComponents()['index-page'] : setPageComponents()[actualPathName] as typeof Block;
-  const component = new Component({});
-  const content = component.getContent();
-  rootContainer?.append(content!);
-};
-
-// Если pathname невалидный, перекидываем на страницу ошибки 404.
-// Пустой pathname проверем отдельно, так как он валидный,
-// по нему отдаём временную страницу с навигацией
-if (!checkPath() && actualPathName !== '') {
-  window.location.replace('/error404');
-}
-    
-document.addEventListener('DOMContentLoaded', () => prepareTemplate());
+window.store = new Store<AppState>(initState);
+document.addEventListener('DOMContentLoaded', () => {
+  prepareTemplate();
+  initApp();
+});

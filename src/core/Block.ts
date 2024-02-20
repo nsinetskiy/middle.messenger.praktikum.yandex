@@ -1,8 +1,8 @@
 import { v4 as makeUUID } from 'uuid';
-import { EventBus } from './EventBus';
+import EventBus from './EventBus';
 import Handlebars from 'handlebars';
 
-type Props = {
+export interface IBlockProps {
   [key: string]: unknown
 }
 
@@ -15,11 +15,12 @@ export class Block {
     INIT: 'init',
     FLOW_RENDER: 'flow:render',
     FLOW_CDM: 'flow:component-did-mount',
-    FLOW_CDU: 'flow:component-did-update'
+    FLOW_CDU: 'flow:component-did-update',
+    FLOW_CWU: 'flow:component-will-unmount'
   };
 
   public id: string = makeUUID();
-  protected props: Props;
+  protected props: IBlockProps;
   protected refs: Record<string, Block> = {};
   public children: Record<string, Block>;
   private eventBus: () => EventBus;
@@ -31,7 +32,7 @@ export class Block {
    * 
    * @returns {void}
    */
-  constructor(propsWithChildren: Props = {}) {
+  constructor(propsWithChildren: IBlockProps = {}) {
     const eventBus = new EventBus();
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
 
@@ -42,8 +43,8 @@ export class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _getChildrenAndProps(childrenAndProps: Props) {
-    const props: Props = {};
+  _getChildrenAndProps(childrenAndProps: IBlockProps) {
+    const props: IBlockProps = {};
     const children: Record<string, Block> = {};
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
@@ -78,6 +79,7 @@ export class Block {
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
   }
 
   private _init() {
@@ -88,7 +90,7 @@ export class Block {
   protected init() {}
 
   _componentDidMount() {
-    this._componentDidMount();
+    this.componentDidMount();
   }
 
   componentDidMount() {}
@@ -98,6 +100,21 @@ export class Block {
     Object.values(this.children).forEach(child => {
       child.dispatchComponentDidMount();
     });
+  }
+
+  _componentWillUnmount() {
+    this.componentWillUnmount();
+    this._removeEvents();
+  }
+
+  componentWillUnmount() {}
+
+  public dispatchComponentWillUnmount() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CWU);
+    Object.values(this.children).forEach(child => {
+      child.dispatchComponentWillUnmount()
+    });
+    this._element?.remove();
   }
 
   private _componentDidUpdate() {
@@ -110,7 +127,7 @@ export class Block {
     return true;
   }
 
-  setProps = (nextProps: Props) => {
+  setProps = (nextProps: IBlockProps) => {
     if (!nextProps) {
       return;
     }
@@ -136,7 +153,7 @@ export class Block {
     this._addEvents();
   }
 
-  private compile(template: string, context: Props) {
+  private compile(template: string, context: IBlockProps) {
     const contextAndStubs = { ...context, __children: [],  __refs: this.refs };
     const html = Handlebars.compile(template)(contextAndStubs);
     const temp = document.createElement('template');
@@ -157,16 +174,16 @@ export class Block {
     return this.element;
   }
 
-  _makePropsProxy(props: Props) {
+  _makePropsProxy(props: IBlockProps) {
     const self = this;
 
     return new Proxy(props, {
-      get(target: Props, prop: string) {
+      get(target: IBlockProps, prop: string) {
         const value = target[prop];
 
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: Props, prop: string, value: unknown) {
+      set(target: IBlockProps, prop: string, value: unknown) {
         const oldTarget = { ...target };
 
         target[prop] = value;

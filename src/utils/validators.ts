@@ -1,10 +1,10 @@
 export const login = (value: string) => {
   if (value.length < 3 || value.length > 20) {
-    return 'Логин должен быть не короче 3 и не длиннее 20 символов';
+    return 'Значение должно быть от 3 до 20 символов';
   }
 
   if (value.match(/^\d+$/)) {
-    return 'Логин должен состоять не только из цифр';
+    return 'Значение должно состоять не только из цифр';
   }
 
   if (!value.match(/^[\w-]+$/)) {
@@ -58,4 +58,18 @@ export const phone = (value: string) => {
   }
   
   return null;
+}
+
+export const chatName = (value: string) => {
+  if (value.length < 1) {
+    return 'Значение не должно быть пустым';
+  }
+
+  return null;
+}
+
+export const chatUserId = (value: string) => {
+  if (!value.match(/^\+?\d+$/)) {
+    return 'Значение должно состоять только из цифр';
+  }
 }
