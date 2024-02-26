@@ -22,6 +22,7 @@
 
 - `npm install` — установка зависимостей,
 - `npm run dev` — запуск в режиме разработки (localhost:5173),
+- `npm run test` — запуск юнит-тестов (Mocha + Chai),
 - `npm run prebuild` — проверка типизации и стиля кода,
 - `npm run build` — сборка продакшн-версии проекта,
 - `npm run preview` — предпросмотр продакшн-версии проекта (localhost:4173),
