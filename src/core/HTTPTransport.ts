@@ -1,4 +1,4 @@
-enum METHOD {
+export enum METHOD {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -28,22 +28,24 @@ const queryStringify = (data: Record<string, unknown>): string => {
   }, '?');
 };
 
-class HTTPTransport {
-  get: HTTPMethod = (url, options = {}) => (
-    this.request(url, { ...options, method: METHOD.GET }, options.timeout)
-  )
+export class HTTPTransport {
+  get: HTTPMethod = (url, options = {}) => {
+    const { data, ...rest } = options;
+    const queryString = data ? queryStringify(data as Record<string, unknown>) : '';
+    return this.request(`${url}${queryString}`, { ...rest, method: METHOD.GET }, options.timeout)
+  }
 
-  post: HTTPMethod = (url, options = {}) => (
-    this.request(url, { ...options, method: METHOD.POST }, options.timeout)
-  )
+  post: HTTPMethod = (url, options = {}) => {
+    return this.request(url, { ...options, method: METHOD.POST }, options.timeout)
+  }
 
-  put: HTTPMethod = (url, options = {}) => (
-    this.request(url, { ...options, method: METHOD.PUT }, options.timeout)
-  )
+  put: HTTPMethod = (url, options = {}) => {
+    return this.request(url, { ...options, method: METHOD.PUT }, options.timeout)
+  }
 
-  delete: HTTPMethod = (url, options = {}) => (
-    this.request(url, { ...options, method: METHOD.DELETE }, options.timeout)
-  )
+  delete: HTTPMethod = (url, options = {}) => {
+    return this.request(url, { ...options, method: METHOD.DELETE }, options.timeout)
+  }
 
   request = (url: string, options: RequestOptions = { method: METHOD.GET }, timeout = 5000) => {
     const {headers = {}, method, data} = options;
@@ -52,12 +54,7 @@ class HTTPTransport {
       const xhr = new XMLHttpRequest();
       const isGet = method === METHOD.GET;
 
-      xhr.open(
-        method!,
-        isGet && !!data
-          ? `${url}${queryStringify(data as Record<string, unknown>)}`
-          : url
-      );
+      xhr.open(method!, url);
       Object.keys(headers).forEach(key => {
         xhr.setRequestHeader(key, headers[key]);
       });
